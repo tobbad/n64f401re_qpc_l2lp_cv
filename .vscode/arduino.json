@@ -1,0 +1,6 @@
+{
+    "port": "/dev/ttyACM0",
+    "configuration": "dosfs=none,speed=80,opt=os",
+    "board": "grumpyoldpizza:stm32l4:NUCLEO-L476RG",
+    "programmer": "dfu"
+}
