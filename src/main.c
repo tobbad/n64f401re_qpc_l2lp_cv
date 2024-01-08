@@ -16,17 +16,22 @@
 * for more details.
 */
 /*$endhead${.::blinky.c} ###################################################*/
+#include <Arduino.h>
 #include "qpc.h"
 #include <stdio.h>
 #include <stdlib.h> /* for exit() */
+uint32_t SERIAL_RX = PA3;
+uint32_t SERIAL_TX = PA2;
+HardwareSerial serial(SERIAL_RX, SERIAL_TX);
 
 enum { BSP_TICKS_PER_SEC = 100 };
 
 void BSP_ledOff(void) {
-    printf("LED OFF\n");
+    serial.println("LED ON\n");
 }
+
 void BSP_ledOn(void) {
-    printf("LED ON\n");
+    serial.println("LED ON\n");
 }
 void Q_onAssert(char const * const module, int loc) {
     fprintf(stderr, "Assertion failed in %s:%d", module, loc);
@@ -72,6 +77,9 @@ static void Blinky_ctor(void) {
 int main() {
     /* statically allocate event queue buffer for the Blinky AO */
     static QEvt const *blinky_queueSto[10];
+
+  serial.begin(115200);
+  serial.println("Started");
 
     QF_init(); /* initialize the framework */
 
