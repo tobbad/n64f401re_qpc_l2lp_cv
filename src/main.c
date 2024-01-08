@@ -74,12 +74,14 @@ static void Blinky_ctor(void) {
     QTimeEvt_ctorX(&me->timeEvt, &me->super, TIMEOUT_SIG, 0U);
 }
 
-int main() {
-    /* statically allocate event queue buffer for the Blinky AO */
-    static QEvt const *blinky_queueSto[10];
-
+int setup(){
   serial.begin(115200);
   serial.println("Started");
+ 
+}
+int loop() {
+    /* statically allocate event queue buffer for the Blinky AO */
+    static QEvt const *blinky_queueSto[10];
 
     QF_init(); /* initialize the framework */
 
